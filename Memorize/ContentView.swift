@@ -8,24 +8,42 @@
 import SwiftUI
 
 struct ContentView: View {
+    let halloweenEmojis = ["👻", "🎃", "🕷️", "🦇", "🧙‍♂️", "🧟‍♂️", "🌕", "⚰️", "🔮", "🍬"]
+    let foodEmojis = ["🍕", "🍔", "🍟", "🌭", "🍿", "🥨", "🍩", "🍦", "🍉", "🍇"]
+    let animalEmojis = ["🐶", "🐱", "🐭", "🐰", "🐼", "🐨", "🐯", "🦁", "🐮", "🐷"]
+
+    let title = "MEMORIZE!"
+
+    @State var currentEmojis: [String]
     @State var cardCount: Int = 4
-    let emojis = ["✌", "😂", "😝", "😁", "😱", "👉", "🙌", "🍻", "🔥", "🌈", "☀", "🎈", "🌹", "💄", "🎀", "⚽", "🎾", "🏁", "😡", "👿", "🐻", "🐶", "🐬", "🐟", "🍀", "👀", "🚗", "🍎", "💝", "💙", "👌", "❤", "😍", "😉", "😓", "😳", "💪", "💩", "🍸", "🔑", "💖", "🌟", "🎉", "🌺", "🎶", "👠", "🏈", "⚾", "🏆", "👽", "💀", "🐵", "🐮", "🐩", "🐎", "💣", "👃", "👂", "🍓", "💘", "💜", "👊", "💋", "😘", "😜", "😵", "🙏", "👋", "🚽", "💃", "💎", "🚀", "🌙", "🎁", "⛄", "🌊", "⛵", "🏀", "🎱", "💰", "👶", "👸", "🐰", "🐷", "🐍", "🐫", "🔫", "👄", "🚲", "🍉", "💛", "💚"]
+
+    init() {
+        self.currentEmojis = halloweenEmojis
+    }
 
     var body: some View {
         VStack {
+            titleView
             ScrollView {
                 cards
             }
             Spacer()
-            cardsModifier
+            themeChoosing
         }
     }
 
-    var cardsModifier: some View {
+    var titleView: some View {
+        Text(title)
+            .font(.largeTitle)
+    }
+
+    var themeChoosing: some View {
         HStack {
-            cardAdderButton
+            setHalloweenThemedButton
             Spacer()
-            cardRemoverButton
+            setFoodThemeButton
+            Spacer()
+            setAnimalThemeButton
         }
         .imageScale(.large)
         .font(.largeTitle)
@@ -33,9 +51,9 @@ struct ContentView: View {
     }
 
     var cards: some View {
-        LazyVGrid(columns: [GridItem(.adaptive(minimum: 180))]) {
+        LazyVGrid(columns: [GridItem(.adaptive(minimum: 100))]) {
             ForEach(0 ..< cardCount, id: \.self) { index in
-                CardView(content: emojis[index])
+                CardView(content: currentEmojis[index])
                     .aspectRatio(2 / 3, contentMode: .fit)
             }
         }
@@ -43,21 +61,34 @@ struct ContentView: View {
         .padding()
     }
 
-    func cardCountModifier(by offset: Int, symbol: String) -> some View {
+    var setHalloweenThemedButton: some View {
         Button(action: {
-            cardCount += offset
+            currentEmojis = halloweenEmojis
         }, label: {
-            Image(systemName: symbol)
+            Image(systemName: "flame.circle")
+                .font(.largeTitle)
         })
-        .disabled(cardCount + offset < 1 || cardCount + offset > emojis.count)
+        .tint(.orange)
     }
 
-    var cardAdderButton: some View {
-        cardCountModifier(by: +1, symbol: "rectangle.stack.fill.badge.plus")
+    var setFoodThemeButton: some View {
+        Button(action: {
+            currentEmojis = foodEmojis
+        }, label: {
+            Image(systemName: "fork.knife.circle")
+                .font(.largeTitle)
+        })
+        .tint(.orange)
     }
 
-    var cardRemoverButton: some View {
-        cardCountModifier(by: -1, symbol: "rectangle.stack.fill.badge.minus")
+    var setAnimalThemeButton: some View {
+        Button(action: {
+            currentEmojis = animalEmojis
+        }, label: {
+            Image(systemName: "pawprint.circle")
+                .font(.largeTitle)
+        })
+        .tint(.orange)
     }
 }
 
