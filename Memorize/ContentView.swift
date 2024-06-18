@@ -8,17 +8,18 @@
 import SwiftUI
 
 struct ContentView: View {
-    let halloweenEmojis = ["👻", "🎃", "🕷️", "🦇", "🧙‍♂️", "🧟‍♂️", "🌕", "⚰️", "🔮", "🍬"]
-    let foodEmojis = ["🍕", "🍔", "🍟", "🌭", "🍿", "🥨", "🍩", "🍦", "🍉", "🍇"]
-    let animalEmojis = ["🐶", "🐱", "🐭", "🐰", "🐼", "🐨", "🐯", "🦁", "🐮", "🐷"]
+    let halloweenEmojis = ["👻", "🎃", "🕷️", "🦇", "🧙‍♂️", "🧟‍♂️", "🌕", "⚰️", "🔮", "🍬", "👻", "🎃", "🕷️", "🦇", "🧙‍♂️", "🧟‍♂️", "🌕", "⚰️", "🔮", "🍬"]
+    let foodEmojis = ["🍕", "🍔", "🍟", "🌭", "🍿", "🥨", "🍩", "🍕", "🍔", "🍟", "🌭", "🍿", "🥨", "🍩"]
+    let animalEmojis = ["🐶", "🐱", "🐭", "🐰", "🐼", "🐶", "🐱", "🐭", "🐰", "🐼"]
 
     let title = "MEMORIZE!"
 
     @State var currentEmojis: [String]
-    @State var cardCount: Int = 4
+    @State var cardCount: Int = 12
 
     init() {
         self.currentEmojis = halloweenEmojis
+        self.cardCount = self.currentEmojis.count
     }
 
     var body: some View {
@@ -35,15 +36,18 @@ struct ContentView: View {
     var titleView: some View {
         Text(title)
             .font(.largeTitle)
+            .foregroundColor(.orange)
     }
 
     var themeChoosing: some View {
-        HStack {
+        HStack(alignment: .center) {
+            Spacer()
             setHalloweenThemedButton
             Spacer()
             setFoodThemeButton
             Spacer()
             setAnimalThemeButton
+            Spacer()
         }
         .imageScale(.large)
         .font(.largeTitle)
@@ -52,8 +56,8 @@ struct ContentView: View {
 
     var cards: some View {
         LazyVGrid(columns: [GridItem(.adaptive(minimum: 100))]) {
-            ForEach(0 ..< cardCount, id: \.self) { index in
-                CardView(content: currentEmojis[index])
+            ForEach(0 ..< cardCount, id: \.self) { _ in
+                CardView(content: currentEmojis[Int.random(in: 0 ..< currentEmojis.count)])
                     .aspectRatio(2 / 3, contentMode: .fit)
             }
         }
@@ -62,33 +66,48 @@ struct ContentView: View {
     }
 
     var setHalloweenThemedButton: some View {
-        Button(action: {
-            currentEmojis = halloweenEmojis
-        }, label: {
-            Image(systemName: "flame.circle")
-                .font(.largeTitle)
-        })
-        .tint(.orange)
+        VStack {
+            Button(action: {
+                currentEmojis = halloweenEmojis
+                cardCount = currentEmojis.count
+            }, label: {
+                Image(systemName: "flame.circle")
+                    .font(.largeTitle)
+            })
+            Text("Halloween")
+                .font(.caption)
+        }
+        .foregroundColor(.orange)
     }
 
     var setFoodThemeButton: some View {
-        Button(action: {
-            currentEmojis = foodEmojis
-        }, label: {
-            Image(systemName: "fork.knife.circle")
-                .font(.largeTitle)
-        })
-        .tint(.orange)
+        VStack {
+            Button(action: {
+                currentEmojis = foodEmojis
+                cardCount = currentEmojis.count
+            }, label: {
+                Image(systemName: "fork.knife.circle")
+                    .font(.largeTitle)
+            })
+            Text("food")
+                .font(.caption)
+        }
+        .foregroundColor(.orange)
     }
 
     var setAnimalThemeButton: some View {
-        Button(action: {
-            currentEmojis = animalEmojis
-        }, label: {
-            Image(systemName: "pawprint.circle")
-                .font(.largeTitle)
-        })
-        .tint(.orange)
+        VStack {
+            Button(action: {
+                currentEmojis = animalEmojis
+                cardCount = currentEmojis.count
+            }, label: {
+                Image(systemName: "pawprint.circle")
+                    .font(.largeTitle)
+            })
+            Text("animal")
+                .font(.caption)
+        }
+        .foregroundColor(.orange)
     }
 }
 
