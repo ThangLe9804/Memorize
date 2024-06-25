@@ -51,8 +51,9 @@ struct ContentView: View {
     var cards: some View {
         LazyVGrid(columns: [GridItem(.adaptive(minimum: 100))]) {
             let emojisCount = currentEmojis.count
+            var tempEmojis = currentEmojis
             ForEach(0 ..< emojisCount, id: \.self) { index in
-                CardView(content: currentEmojis.remove(at: index))
+                CardView(content: tempEmojis[index])
                     .aspectRatio(2 / 3, contentMode: .fit)
             }
         }
