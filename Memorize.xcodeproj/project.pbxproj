@@ -7,8 +7,10 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		02BB9DA52C88171B0080B71A /* MemoryGameModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02BB9DA42C88171B0080B71A /* MemoryGameModel.swift */; };
+		02BB9DA72C8DEBB80080B71A /* EmojiMemoryGameViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02BB9DA62C8DEBB80080B71A /* EmojiMemoryGameViewModel.swift */; };
 		C3AAC46E2BA9E531007064A2 /* MemorizeApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3AAC46D2BA9E531007064A2 /* MemorizeApp.swift */; };
-		C3AAC4702BA9E531007064A2 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3AAC46F2BA9E531007064A2 /* ContentView.swift */; };
+		C3AAC4702BA9E531007064A2 /* EmojiMemoryGameView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3AAC46F2BA9E531007064A2 /* EmojiMemoryGameView.swift */; };
 		C3AAC4722BA9E535007064A2 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = C3AAC4712BA9E535007064A2 /* Assets.xcassets */; };
 		C3AAC4752BA9E535007064A2 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = C3AAC4742BA9E535007064A2 /* Preview Assets.xcassets */; };
 		C3AAC47F2BA9E536007064A2 /* MemorizeTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3AAC47E2BA9E536007064A2 /* MemorizeTests.swift */; };
@@ -34,9 +36,11 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		02BB9DA42C88171B0080B71A /* MemoryGameModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemoryGameModel.swift; sourceTree = "<group>"; };
+		02BB9DA62C8DEBB80080B71A /* EmojiMemoryGameViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmojiMemoryGameViewModel.swift; sourceTree = "<group>"; };
 		C3AAC46A2BA9E531007064A2 /* Memorize.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Memorize.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		C3AAC46D2BA9E531007064A2 /* MemorizeApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemorizeApp.swift; sourceTree = "<group>"; };
-		C3AAC46F2BA9E531007064A2 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
+		C3AAC46F2BA9E531007064A2 /* EmojiMemoryGameView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmojiMemoryGameView.swift; sourceTree = "<group>"; };
 		C3AAC4712BA9E535007064A2 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		C3AAC4742BA9E535007064A2 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		C3AAC47A2BA9E536007064A2 /* MemorizeTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = MemorizeTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -94,10 +98,12 @@
 		C3AAC46C2BA9E531007064A2 /* Memorize */ = {
 			isa = PBXGroup;
 			children = (
+				02BB9DA42C88171B0080B71A /* MemoryGameModel.swift */,
 				C3AAC46D2BA9E531007064A2 /* MemorizeApp.swift */,
-				C3AAC46F2BA9E531007064A2 /* ContentView.swift */,
+				C3AAC46F2BA9E531007064A2 /* EmojiMemoryGameView.swift */,
 				C3AAC4712BA9E535007064A2 /* Assets.xcassets */,
 				C3AAC4732BA9E535007064A2 /* Preview Content */,
+				02BB9DA62C8DEBB80080B71A /* EmojiMemoryGameViewModel.swift */,
 			);
 			path = Memorize;
 			sourceTree = "<group>";
@@ -257,8 +263,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				C3AAC4702BA9E531007064A2 /* ContentView.swift in Sources */,
+				C3AAC4702BA9E531007064A2 /* EmojiMemoryGameView.swift in Sources */,
 				C3AAC46E2BA9E531007064A2 /* MemorizeApp.swift in Sources */,
+				02BB9DA52C88171B0080B71A /* MemoryGameModel.swift in Sources */,
+				02BB9DA72C8DEBB80080B71A /* EmojiMemoryGameViewModel.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
