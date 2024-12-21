@@ -7,30 +7,70 @@
 
 import Foundation
 
-struct MemoryGameModel<CardContent> where CardContent: Equatable {
+struct MemoryGameModel<CardContent> where CardContent: Equatable & Hashable {
     private(set) var cards: [Card]
+    private var onlyFaceUpCardIndex: Int? {
+        get { cards.indices.filter { cards[$0].isFaceUp }.only }
+        set {
+            for index in cards.indices {
+                cards[index].isFaceUp = index == newValue
+            }
+        }
+    }
 
     init(numberOfPairsOfCards: Int, cardContentFactory: (Int) -> CardContent) {
         self.cards = []
 
         for pairIndex in 0 ..< max(2, numberOfPairsOfCards) {
             let cardContent = cardContentFactory(pairIndex)
-            let newCard = Card(content: cardContent)
-            cards.append(newCard)
-            cards.append(newCard)
+            cards.append(Card(content: cardContent))
+            cards.append(Card(content: cardContent))
         }
     }
 
-    func choose(_ card: Card) {}
+    mutating func choose(_ selectedCard: Card) {
+        let index = cards.firstIndex(of: selectedCard)
+
+        if index == onlyFaceUpCardIndex {
+            flipDownAllCards()
+            onlyFaceUpCardIndex = nil
+            return
+        }
+
+        guard let index else { return }
+
+        if !cards[index].isFaceUp && !cards[index].isMatched {
+            if let potentialMatchIndex = onlyFaceUpCardIndex {
+                if cards[potentialMatchIndex].content == cards[index].content {
+                    cards[index].isMatched = true
+                    cards[potentialMatchIndex].isMatched = true
+                }
+            } else {
+                onlyFaceUpCardIndex = index
+            }
+            cards[index].isFaceUp = true
+        }
+    }
 
     mutating func shuffle() {
         cards.shuffle()
-        print(cards.map { $0.content })
+        print(cards)
     }
 
-    struct Card: Equatable {
-        var isFaceUp = true
+    mutating func flipDownAllCards() {
+        for index in cards.indices {
+            cards[index].isFaceUp = false
+        }
+    }
+
+    struct Card: Equatable, Identifiable, CustomDebugStringConvertible {
+        var isFaceUp = false
         var isMatched = false
         let content: CardContent
+
+        var id: Int = UUID().hashValue
+        var debugDescription: String {
+            "\(id): \(content) \(isFaceUp ? "face up" : "face down") \(isMatched ? "matched" : "not matched")"
+        }
     }
 }
