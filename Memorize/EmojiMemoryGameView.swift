@@ -10,29 +10,20 @@ import SwiftUI
 struct EmojiMemoryGameView: View {
     @ObservedObject var viewModel: EmojiMemoryGameViewModel
 
-    let title = "MEMORIZE!"
-
     @State private var currentEmojis: [String] = []
 
     var body: some View {
         VStack {
-            titleView
             ScrollView {
                 cards
                     .animation(.default, value: viewModel.cards)
             }
             Spacer()
-            Button("Shuffle", action: {viewModel.shuffle()})
-                .padding(EdgeInsets(top: 15, leading: 15, bottom: 15, trailing: 15))
-                .buttonStyle(.borderedProminent)
-                .tint(.orange)
+            HStack {
+                Button(StringResource.ShuffleButtonTitle, action: { viewModel.shuffle() }).mainButtonStyle()
+                Button(StringResource.NewGameButtonTitle, action: { viewModel.makeNewGame() }).mainButtonStyle()
+            }
         }
-    }
-
-    var titleView: some View {
-        Text(title)
-            .font(.largeTitle)
-            .foregroundColor(.orange)
     }
 
     var cards: some View {
@@ -56,33 +47,7 @@ struct EmojiMemoryGameView: View {
     }
 }
 
-struct CardView: View {
-    let transparent: Double = 0
-    let opaque: Double = 1
-    let card: MemoryGameModel<String>.Card
 
-    init(_ card: MemoryGameModel<String>.Card) {
-        self.card = card
-    }
-
-    var body: some View {
-        ZStack {
-            let base = RoundedRectangle(cornerRadius: 12)
-            Group {
-                base.fill(.white)
-                base.strokeBorder(lineWidth: 2)
-                Text(card.content)
-                    .font(.system(size: 200))
-                    .minimumScaleFactor(0.01)
-                    .aspectRatio(1, contentMode: .fit)
-            }
-            .opacity(card.isFaceUp ? opaque : transparent)
-            base.fill(.orange).opacity(card.isFaceUp ? transparent : opaque)
-        }
-        .shadow(radius: 10)
-        .opacity(card.isFaceUp || !card.isMatched ? opaque : transparent)
-     }
-}
 
 #Preview {
     EmojiMemoryGameView(viewModel: EmojiMemoryGameViewModel())

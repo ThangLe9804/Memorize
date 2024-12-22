@@ -16,7 +16,7 @@ class EmojiMemoryGameViewModel: ObservableObject {
 
     private static func createMemoryGame() -> MemoryGameModel<String> {
         return MemoryGameModel(
-            numberOfPairsOfCards: 8,
+            numberOfPairsOfCards: 10,
             cardContentFactory: { pairIndex in
                 if pairIndex < emojis.count {
                     emojis[pairIndex]
@@ -40,5 +40,9 @@ class EmojiMemoryGameViewModel: ObservableObject {
 
     func choose(_ card: MemoryGameModel<String>.Card) {
         memoryGameModel.choose(card)
+    }
+
+    func makeNewGame()  {
+        // TODO: implement later
     }
 }
