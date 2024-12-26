@@ -52,7 +52,7 @@ struct MemoryGameModel<CardContent> where CardContent: Equatable & Hashable {
         }
     }
 
-    mutating func shuffle() {
+    mutating func shuffleCards() {
         cards.shuffle()
         print(cards)
     }
@@ -61,6 +61,14 @@ struct MemoryGameModel<CardContent> where CardContent: Equatable & Hashable {
         for index in cards.indices {
             cards[index].isFaceUp = false
         }
+    }
+
+    mutating func makeNewGame() {
+        for index in cards.indices {
+            cards[index].isFaceUp = false
+            cards[index].isMatched = false
+        }
+        shuffleCards()
     }
 
     struct Card: Equatable, Identifiable, CustomDebugStringConvertible {

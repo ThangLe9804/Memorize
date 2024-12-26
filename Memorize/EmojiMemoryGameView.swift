@@ -10,8 +10,6 @@ import SwiftUI
 struct EmojiMemoryGameView: View {
     @ObservedObject var viewModel: EmojiMemoryGameViewModel
 
-    @State private var currentEmojis: [String] = []
-
     var body: some View {
         VStack {
             ScrollView {
@@ -20,7 +18,7 @@ struct EmojiMemoryGameView: View {
             }
             Spacer()
             HStack {
-                Button(StringResource.ShuffleButtonTitle, action: { viewModel.shuffle() }).mainButtonStyle()
+                Button(StringResource.ShuffleButtonTitle, action: { viewModel.shuffleCards() }).mainButtonStyle()
                 Button(StringResource.NewGameButtonTitle, action: { viewModel.makeNewGame() }).mainButtonStyle()
             }
         }
@@ -40,14 +38,7 @@ struct EmojiMemoryGameView: View {
         .foregroundColor(.orange)
         .padding()
     }
-
-    func setCurrentEmojis(with newEmojis: [String]) {
-        currentEmojis = newEmojis
-        currentEmojis = currentEmojis.shuffled()
-    }
 }
-
-
 
 #Preview {
     EmojiMemoryGameView(viewModel: EmojiMemoryGameViewModel())

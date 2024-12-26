@@ -9,7 +9,7 @@ import Foundation
 
 class EmojiMemoryGameViewModel: ObservableObject {
     private static let emojis =
-    ["👻", "🎃", "🕷️", "🦇", "🧙‍♂️", "🧟‍♂️", "🌕", "⚰️", "🔮", "🍬"]
+        ["👻", "🎃", "🕷️", "🦇", "🧙‍♂️", "🧟‍♂️", "🌕", "⚰️", "🔮", "🍬"]
 
     let foodEmojis = ["🍕", "🍔", "🍟", "🌭", "🍿", "🥨", "🍩"]
     let animalEmojis = ["🐶", "🐱", "🐭", "🐰", "🐼"]
@@ -26,23 +26,22 @@ class EmojiMemoryGameViewModel: ObservableObject {
             })
     }
 
-    @Published  var memoryGameModel: MemoryGameModel<String> = createMemoryGame()
+    @Published var memoryGameModel: MemoryGameModel<String> = createMemoryGame()
 
     var cards: [MemoryGameModel<String>.Card] {
         return memoryGameModel.cards
     }
 
     // MARK: - Intent
-
-    func shuffle() {
-        memoryGameModel.shuffle()
+    func shuffleCards() {
+        memoryGameModel.shuffleCards()
     }
 
     func choose(_ card: MemoryGameModel<String>.Card) {
         memoryGameModel.choose(card)
     }
 
-    func makeNewGame()  {
-        // TODO: implement later
+    func makeNewGame() {
+        memoryGameModel.makeNewGame()
     }
 }
