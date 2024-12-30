@@ -9,6 +9,7 @@ import SwiftUI
 
 struct EmojiMemoryGameView: View {
     @ObservedObject var viewModel: EmojiMemoryGameViewModel
+    @EnvironmentObject var themeManager: ThemeManager
 
     var body: some View {
         VStack {
@@ -18,8 +19,8 @@ struct EmojiMemoryGameView: View {
             }
             Spacer()
             HStack {
-                Button(StringResource.ShuffleButtonTitle, action: { viewModel.shuffleCards() }).mainButtonStyle()
-                Button(StringResource.NewGameButtonTitle, action: { viewModel.makeNewGame() }).mainButtonStyle()
+                Button(StringResource.ShuffleButtonTitle, action: { viewModel.shuffleCards() }).mainButtonStyle(using: themeManager)
+                Button(StringResource.NewGameButtonTitle, action: { viewModel.makeNewGame() }).mainButtonStyle(using: themeManager)
             }
         }
     }
@@ -35,11 +36,12 @@ struct EmojiMemoryGameView: View {
                     }
             }
         }
-        .foregroundColor(.orange)
+        .foregroundColor(Color(hex: themeManager.theme.colorAsHex))
         .padding()
     }
 }
 
 #Preview {
     EmojiMemoryGameView(viewModel: EmojiMemoryGameViewModel())
+        .environmentObject(ThemeManager.shared)
 }

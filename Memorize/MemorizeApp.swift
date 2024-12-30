@@ -10,10 +10,12 @@ import SwiftUI
 @main
 struct MemorizeApp: App {
     @StateObject var game = EmojiMemoryGameViewModel()
+    @StateObject var themeManager = ThemeManager.shared
 
     var body: some Scene {
         WindowGroup {
             EmojiMemoryGameView(viewModel: game)
+                .environmentObject(themeManager)
         }
     }
 }

@@ -18,14 +18,20 @@ struct MemoryGameModel<CardContent> where CardContent: Equatable & Hashable {
         }
     }
 
-    init(numberOfPairsOfCards: Int, cardContentFactory: (Int) -> CardContent) {
-        self.cards = []
+    init() {
+        cards = []
+        populateAndShuffleCards()
+    }
 
-        for pairIndex in 0 ..< max(2, numberOfPairsOfCards) {
-            let cardContent = cardContentFactory(pairIndex)
-            cards.append(Card(content: cardContent))
-            cards.append(Card(content: cardContent))
+    fileprivate mutating func populateAndShuffleCards() {
+        cards.removeAll()
+        let emojis = ThemeManager.shared.theme.emojis.shuffled()
+        for pairIndex in 0 ..< max(2, ThemeManager.shared.theme.numberOfPairs) {
+            let cardContent = emojis[pairIndex]
+            cards.append(Card(content: cardContent as! CardContent))
+            cards.append(Card(content: cardContent as! CardContent))
         }
+        cards.shuffle()
     }
 
     mutating func choose(_ selectedCard: Card) {
@@ -64,11 +70,8 @@ struct MemoryGameModel<CardContent> where CardContent: Equatable & Hashable {
     }
 
     mutating func makeNewGame() {
-        for index in cards.indices {
-            cards[index].isFaceUp = false
-            cards[index].isMatched = false
-        }
-        shuffleCards()
+        ThemeManager.shared.randomizeTheme()
+        populateAndShuffleCards()
     }
 
     struct Card: Equatable, Identifiable, CustomDebugStringConvertible {

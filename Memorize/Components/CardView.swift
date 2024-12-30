@@ -5,7 +5,6 @@
 //  Created by Thang Le on 22/12/24.
 //
 
-
 import SwiftUI
 
 struct CardView: View {
@@ -29,9 +28,11 @@ struct CardView: View {
                     .aspectRatio(1, contentMode: .fit)
             }
             .opacity(card.isFaceUp ? opaque : transparent)
-            base.fill(.orange).opacity(card.isFaceUp ? transparent : opaque)
+            base
+                .fill(Color(hex: ThemeManager.shared.theme.colorAsHex))
+                .opacity(card.isFaceUp ? transparent : opaque)
         }
         .shadow(radius: 10)
         .opacity(card.isFaceUp || !card.isMatched ? opaque : transparent)
-     }
+    }
 }
