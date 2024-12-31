@@ -23,7 +23,7 @@ struct MemoryGameModel<CardContent> where CardContent: Equatable & Hashable {
         populateAndShuffleCards()
     }
 
-    fileprivate mutating func populateAndShuffleCards() {
+    private mutating func populateAndShuffleCards() {
         cards.removeAll()
         let emojis = ThemeManager.shared.currentTheme.emojis.shuffled()
         for pairIndex in 0 ..< max(2, ThemeManager.shared.currentTheme.numberOfPairs) {
@@ -63,7 +63,7 @@ struct MemoryGameModel<CardContent> where CardContent: Equatable & Hashable {
         print(cards)
     }
 
-    mutating func flipDownAllCards() {
+    private mutating func flipDownAllCards() {
         for index in cards.indices {
             cards[index].isFaceUp = false
         }
