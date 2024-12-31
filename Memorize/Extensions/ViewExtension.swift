@@ -9,7 +9,7 @@ import SwiftUICore
 
 extension View {
     func mainButtonStyle(using themeManager: ThemeManager) -> some View {
-        modifier(MainButtonStyle(theme: themeManager.theme))
+        modifier(MainButtonStyle(theme: themeManager.currentTheme))
     }
 }
 

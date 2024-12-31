@@ -29,7 +29,7 @@ struct CardView: View {
             }
             .opacity(card.isFaceUp ? opaque : transparent)
             base
-                .fill(Color(hex: ThemeManager.shared.theme.colorAsHex))
+                .fill(Color(hex: ThemeManager.shared.currentTheme.colorAsHex))
                 .opacity(card.isFaceUp ? transparent : opaque)
         }
         .shadow(radius: 10)

@@ -25,8 +25,8 @@ struct MemoryGameModel<CardContent> where CardContent: Equatable & Hashable {
 
     fileprivate mutating func populateAndShuffleCards() {
         cards.removeAll()
-        let emojis = ThemeManager.shared.theme.emojis.shuffled()
-        for pairIndex in 0 ..< max(2, ThemeManager.shared.theme.numberOfPairs) {
+        let emojis = ThemeManager.shared.currentTheme.emojis.shuffled()
+        for pairIndex in 0 ..< max(2, ThemeManager.shared.currentTheme.numberOfPairs) {
             let cardContent = emojis[pairIndex]
             cards.append(Card(content: cardContent as! CardContent))
             cards.append(Card(content: cardContent as! CardContent))

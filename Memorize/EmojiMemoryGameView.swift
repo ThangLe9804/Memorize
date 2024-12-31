@@ -36,7 +36,7 @@ struct EmojiMemoryGameView: View {
                     }
             }
         }
-        .foregroundColor(Color(hex: themeManager.theme.colorAsHex))
+        .foregroundColor(Color(hex: themeManager.currentTheme.colorAsHex))
         .padding()
     }
 }

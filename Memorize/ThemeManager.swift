@@ -23,21 +23,21 @@ class ThemeManager: ObservableObject {
             Theme(
                 name: "Animal",
                 emojis: ["🐶", "🐱", "🐭", "🐹", "🐰", "🦊", "🐻", "🐼", "🐨", "🐯", "🦁", "🐮", "🐷", "🐸", "🐵", "🦄", "🐔", "🐧", "🐦", "🐤", "🐣", "🐥", "🦆", "🦅", "🦉", "🦇", "🐺", "🐗", "🐴", "🐢", "🐍", "🦎", "🦂", "🦀", "🐟", "🐠", "🐡", "🐙", "🦑", "🦐", "🦞", "🦈", "🐳", "🐋", "🐊", "🦓", "🦒", "🐆", "🐅", "🐃", "🐂", "🐄", "🐪", "🐫", "🦏", "🦛", "🐘", "🦣", "🐁", "🐀", "🐇", "🦨", "🦡", "🦦", "🦥", "🐾"],
-                numberOfPairs: 5,
+                numberOfPairs: 8,
                 colorAsHex: 0x008000),
             Theme(
                 name: "Hand signs",
                 emojis: ["👋", "🤚", "✋", "🖖", "✌️", "🤞", "🤟", "🤘", "🤙", "👌", "👍", "👎", "👊", "✊", "🫱", "🫲", "🫳", "🫴", "🫰", "🙌", "🙏", "👐", "🤲", "🫶"],
-                numberOfPairs: 6,
+                numberOfPairs: 9,
                 colorAsHex: 0x5D3FD3)
         ]
 
     static let shared: ThemeManager = .init()
 
-    @Published var theme: Theme = ThemeManager.availableThemes.randomElement()!
+    @Published var currentTheme: Theme = ThemeManager.availableThemes.randomElement()!
 
     func randomizeTheme() {
-        theme = ThemeManager.availableThemes.filter { $0 != theme }.randomElement()!
+        currentTheme = ThemeManager.availableThemes.filter { $0 != currentTheme }.randomElement()!
     }
 
     private init() {}
